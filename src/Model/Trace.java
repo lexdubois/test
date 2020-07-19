@@ -12,8 +12,10 @@ public class Trace {
 
     }
 
-    public int getTraceLength() {
-        return 0;
+    public double getTraceLength(Coords coords1, Coords coords2) {
+        double distance = Math.sqrt(Math.pow(((coords2.getX()) - (coords1.getX())), 2) + Math.pow(((coords2.getX()) - (coords1.getX())), 2));
+
+        return distance;
     }
 
 
@@ -38,9 +40,10 @@ public class Trace {
         System.out.println("Head: " + trace1.getTraceHead());
         System.out.println((trace1.traceList.get(0).getX()) + ", " + trace1.traceList.get(0).getY());
         Coords c1 = new Coords(1, 2);
-        Coords c2 = new Coords(2, 2);
+        Coords c2 = new Coords(4, 2);
         trace1.addCoords(c1);
         trace1.addCoords(c2);
+        System.out.println(trace1.getTraceLength(c1, c2));
         System.out.println("Head: " + trace1.getTraceHead());
         System.out.println("Tail: " + trace1.getTraceTail());
 
