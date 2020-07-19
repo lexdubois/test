@@ -3,22 +3,53 @@ package Model;
 import java.awt.*;
 import java.util.LinkedList;
 public class Trace {
+    private LinkedList<Coords> traceList;
+    private Coords head;
+    private Coords tail;
 
     public Trace() {
+        this.traceList = new LinkedList<Coords>();
 
     }
 
+    public int getTraceLength() {
+        return 0;
+    }
+
+
+
+    public void addCoords(Coords coords){
+        traceList.add(coords);
+        head = coords;
+    }
+
+    public Coords getTraceHead() {
+        return this.head;
+    }
+
+    public Coords getTraceTail() {
+        return traceList.getFirst();
+    }
+
     public static void main(String[] args) {
-        LinkedList<Point> traceList = new LinkedList<>();
+//        LinkedList<Coords> traceList = new LinkedList<>();
+        Trace trace1 = new Trace();
+        trace1.addCoords(new Coords(9, 5));
+        System.out.println("Head: " + trace1.getTraceHead());
+        System.out.println((trace1.traceList.get(0).getX()) + ", " + trace1.traceList.get(0).getY());
         Coords c1 = new Coords(1, 2);
         Coords c2 = new Coords(2, 2);
-        Point p1 = new Point(1, 2);
-        traceList.add(p1);
+        trace1.addCoords(c1);
+        trace1.addCoords(c2);
+        System.out.println("Head: " + trace1.getTraceHead());
+        System.out.println("Tail: " + trace1.getTraceTail());
+
+//        traceList.add(c1);
 //        traceList.add(c2);
-        System.out.println(c1.getX());
-        System.out.println((traceList.get(0).getX())+", " + traceList.get(0).getY());
-        System.out.println("LinkedList:" + traceList);
-        System.out.println(traceList.toString());
+//        System.out.println((c1.getX()) + ", " + c1.getY());
+//        System.out.println((traceList.get(1).getX())+", " + traceList.get(1).getY());
+        System.out.println("LinkedList:" + trace1.traceList);
+//        System.out.println(traceList.toString());
     }
 
 
