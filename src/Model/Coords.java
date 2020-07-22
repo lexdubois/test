@@ -1,29 +1,37 @@
 package Model;
 
 public class Coords{
-    int x;
-    int y;
+    double x;
+    double y;
 
 
-    public Coords(int x, int y){
+    public Coords(double x, double y){
         this.x = x;
         this.y = y;
     }
 
-//    public void setX(int x) {
+//    public void setX(double x) {
 //        this.x = x;
 //    }
-
-//    public void setY(int y) {
+////
+//    public void setY(double y) {
 //        this.y = y;
 //    }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
+    }
+
+    public double distanceTo(Coords c) {
+        return Math.sqrt(Math.pow(c.getX() - this.getX(), 2) + (Math.pow(c.getY() - this.getY(), 2)));
+    }
+
+    public static double getDistanceBetween(Coords c1, Coords  c2) {
+        return c1.distanceTo(c2);
     }
 
 
