@@ -3,11 +3,13 @@ package View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class TronGUI extends JFrame{
     JPanel mainPanel = new JPanel();
-    JButton button = new JButton(new ImageIcon("D:\\test\\src\\Tron.PNG"));
+    JButton button = new JButton(new ImageIcon("D:\\tronGame\\src\\View\\Tron.PNG"));
 
     public static void main(String[] args) {
         new TronGUI("Tron 2.0");

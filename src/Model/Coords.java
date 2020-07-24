@@ -3,6 +3,7 @@ package Model;
 public class Coords{
     double x;
     double y;
+    Direction direction;
 
 
     public Coords(double x, double y){
