@@ -1,6 +1,6 @@
-package Controller;
-import Model.Direction;
-import Model.Player;
+package com.lxe.tron.controller;
+import com.lxe.tron.model.Direction;
+import com.lxe.tron.model.Player;
 
 public class PlayerController {
     protected Player player;

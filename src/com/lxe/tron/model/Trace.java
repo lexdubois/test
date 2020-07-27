@@ -1,9 +1,6 @@
-package Model;
+package com.lxe.tron.model;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Trace {
     private LinkedList<Coords> traceList;

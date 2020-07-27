@@ -1,8 +1,6 @@
-package Model;
+package com.lxe.tron.model;
 
-import Controller.PlayerController;
-import Model.Direction;
-import Model.Player;
+import com.lxe.tron.controller.PlayerController;
 
 public class PlayerTest {
     public static void main(String[] args) throws Exception {

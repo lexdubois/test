@@ -1,6 +1,4 @@
-package Model;
-
-import Model.Direction;
+package com.lxe.tron.model;
 
 public class Player {
 

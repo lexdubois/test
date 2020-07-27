@@ -1,4 +1,4 @@
-package Model;
+package com.lxe.tron.model;
 
 public class Coords{
     double x;
