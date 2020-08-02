@@ -2,24 +2,31 @@ package com.lxe.tron.view;
 
 import com.lxe.tron.model.Trace;
 
-public class HumanTraceAnimator implements GameStatusController {
+public class HumanTraceAnimator implements GameStatusController, Runnable {
 
     protected Thread traceAnimator;
     protected Trace trace;
+    protected GamePanel gamePanel;
 
-    public HumanTraceAnimator(Trace trace) {
+    public HumanTraceAnimator(Trace trace, GamePanel gamePanel) {
         this.trace = trace;
+        this.gamePanel = gamePanel;
     }
 
+    private boolean stopped;
+    protected long refreshRate = 250;
 
     @Override
     public void start() {
-        traceAnimator = new Thread(new AnimatorThread());
+        if (!(traceAnimator==null)) throw new IllegalStateException("Check your fucking code dude!");
+        traceAnimator = new Thread(this);
+        stopped = false;
+        traceAnimator.start();
     }
 
     @Override
     public void stop() {
-
+        stopped = true;
     }
 
     @Override
@@ -32,31 +39,26 @@ public class HumanTraceAnimator implements GameStatusController {
 
     }
 
-    protected class AnimatorThread implements Runnable, GameStatusController {
+    @Override
+    public void run() {
+        while (stopped == false) {
 
-        @Override
-        public void run() {
 
-        }
+            gamePanel.updateTrace(trace.getDirection(), 5);
 
-        @Override
-        public void start() {
+            synchronized(this) {
+                try {
+                    this.wait(refreshRate);
+                }
+                catch (InterruptedException ie) {
+                    stopped = true;
+                }
 
-        }
-
-        @Override
-        public void stop() {
-
-        }
-
-        @Override
-        public void suspend() {
+            }
 
         }
 
-        @Override
-        public void resume() {
 
-        }
     }
+
 }

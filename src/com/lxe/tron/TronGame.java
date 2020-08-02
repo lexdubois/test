@@ -1,9 +1,9 @@
 package com.lxe.tron;
 
-import com.lxe.tron.view.GamePanel;
-import com.lxe.tron.view.GameStatusController;
-import com.lxe.tron.view.GameStatusListener;
-import com.lxe.tron.view.SplashPanel;
+import com.lxe.tron.model.Coords;
+import com.lxe.tron.model.Direction;
+import com.lxe.tron.model.Trace;
+import com.lxe.tron.view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,9 +41,18 @@ public class TronGame implements GameStatusController {
         gameFrame.setVisible(true);
         splash.showSplash();
         gameFrame.remove(splash);
-        GamePanel gamePanel = new GamePanel();
+
+        Trace trace = new Trace(new Coords(500, 350), Direction.UP);
+        GamePanel gamePanel = new GamePanel(trace);
+        HumanTraceAnimator traceAnimator = new HumanTraceAnimator(trace, gamePanel);
+
+
         gameFrame.add(gamePanel);
         gameFrame.repaint();
+        gamePanel.grabFocus();
+
+
+        traceAnimator.start();
 
 //        JLabel tempLabel = new JLabel("!! Game Panel Here !!");
 //        tempLabel.setForeground(Color.DARK_GRAY);

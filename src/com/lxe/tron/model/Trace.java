@@ -6,10 +6,30 @@ public class Trace {
     private LinkedList<Coords> traceList;
     private Coords head;
     private Coords tail;
+    private Direction direction;
 
-    public Trace() {
+    public Trace(Coords startCoords, Direction startDirection) {
         this.traceList = new LinkedList<Coords>();
+        this.traceList.add(startCoords);
+        this.direction = startDirection;
+        this.head = startCoords;
+        this.tail = startCoords;
+    }
 
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void forward(float distance) {
+        traceList.removeFirst();
+        this.head = new Coords(distance * direction.getDeltaX(), distance *direction.getDeltaY());
+        traceList.addFirst(this.head);
+
+        System.out.println("this.head: " + this.head);
     }
 
     public double getTraceLength() {
@@ -71,40 +91,40 @@ public class Trace {
         traceList.addLast(new Coords(newX, newY));
     }
 
-    public static void main(String[] args) {
-//        LinkedList<Coords> traceList = new LinkedList<>();
-        Trace trace1 = new Trace();
-//        trace1.addCoords(new Coords(4, 2));
+//    public static void main(String[] args) {
+////        LinkedList<Coords> traceList = new LinkedList<>();
+//        Trace trace1 = new Trace();
+////        trace1.addCoords(new Coords(4, 2));
+////        System.out.println("Head: " + trace1.getTraceHead());
+////        System.out.println((trace1.traceList.get(0).getX()) + ", " + trace1.traceList.get(0).getY());
+////        Coords c1 = new Coords(1, 2);
+//        Coords c2 = new Coords(4, 2);
+//        Coords c3 = new Coords(4, 3);
+//        Coords c4 = new Coords(4, 4);
+//        Coords c5 = new Coords(12, 8);
+//
+////        trace1.addCoords(c1);
+//        trace1.addCoords(c2);
+//        trace1.addCoords(c3);
+//        trace1.addCoords(c4);
+//        trace1.addCoords(c5);
+////        System.out.println("get Coord by Index: " + trace1.getCoordByIndex(3));
+////        System.out.println("get Coord distance by Index: " + trace1.getCoordsDistanceByIndex(4, 1));
+////        System.out.println("get Coords: " + trace1.getCoords());
+//
+//        System.out.println("getTraceLength : " + trace1.getTraceLength());
+//        trace1.maxLength();
+//        System.out.println("getTraceLength : " + trace1.getTraceLength());
 //        System.out.println("Head: " + trace1.getTraceHead());
-//        System.out.println((trace1.traceList.get(0).getX()) + ", " + trace1.traceList.get(0).getY());
-//        Coords c1 = new Coords(1, 2);
-        Coords c2 = new Coords(4, 2);
-        Coords c3 = new Coords(4, 3);
-        Coords c4 = new Coords(4, 4);
-        Coords c5 = new Coords(12, 8);
-
-//        trace1.addCoords(c1);
-        trace1.addCoords(c2);
-        trace1.addCoords(c3);
-        trace1.addCoords(c4);
-        trace1.addCoords(c5);
-//        System.out.println("get Coord by Index: " + trace1.getCoordByIndex(3));
-//        System.out.println("get Coord distance by Index: " + trace1.getCoordsDistanceByIndex(4, 1));
-//        System.out.println("get Coords: " + trace1.getCoords());
-
-        System.out.println("getTraceLength : " + trace1.getTraceLength());
-        trace1.maxLength();
-        System.out.println("getTraceLength : " + trace1.getTraceLength());
-        System.out.println("Head: " + trace1.getTraceHead());
-        System.out.println("Tail: " + trace1.getTraceTail());
-        System.out.println("Get i: " + trace1.traceList.get(0).getX());
-//        traceList.add(c1);
-//        traceList.add(c2);
-//        System.out.println((c1.getX()) + ", " + c1.getY());
-//        System.out.println((traceList.get(1).getX())+", " + traceList.get(1).getY());
-        System.out.println("LinkedList:" + trace1.traceList);
-//        System.out.println(traceList.toString());
-    }
+//        System.out.println("Tail: " + trace1.getTraceTail());
+//        System.out.println("Get i: " + trace1.traceList.get(0).getX());
+////        traceList.add(c1);
+////        traceList.add(c2);
+////        System.out.println((c1.getX()) + ", " + c1.getY());
+////        System.out.println((traceList.get(1).getX())+", " + traceList.get(1).getY());
+//        System.out.println("LinkedList:" + trace1.traceList);
+////        System.out.println(traceList.toString());
+//    }
 
 
     }

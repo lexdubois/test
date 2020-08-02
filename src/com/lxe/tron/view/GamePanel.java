@@ -1,6 +1,7 @@
 package com.lxe.tron.view;
 
 import com.lxe.tron.model.Direction;
+import com.lxe.tron.model.Trace;
 import com.sun.jdi.Value;
 
 import javax.swing.*;
@@ -10,21 +11,35 @@ import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel {
     protected GameEventHandler gameHandler = new GameEventHandler();
-    private int x = 500;
-    private int y = 350;
-    private int x2= 500;
-    private int y2= 360;
+
+    protected Trace trace;
+
+    private int x;
+    private int y;
+    private int x2;
+    private int y2;
 
 
-    public GamePanel() {
+    public GamePanel(Trace trace) {
+        super();
+        this.trace = trace;
+
+        this.x  = (int) trace.getTraceHead().getX();
+        this.y  = (int) trace.getTraceHead().getY();
+        this.x2 = (int) trace.getTraceHead().getX();
+        this.y2 = (int) trace.getTraceHead().getY();
+
         this.setPreferredSize(new Dimension(1920, 1200));
         this.setMinimumSize(new Dimension(1920, 1200));
         this.setLayout(new BorderLayout());
         this.setBackground(Color.MAGENTA);
-
+        GameEventHandler listener = new GameEventHandler();
+        this.addKeyListener(listener);
+        this.setFocusable(true);
     }
 
     protected void paintComponent (Graphics g) {
+        System.out.println("paintC: x: " + x + ", y: " + y);
         g.setColor(Color.BLUE);
         g.drawLine(x, y, x2, y2);
         x = x2;
@@ -32,8 +47,12 @@ public class GamePanel extends JPanel {
     }
 
     public void updateTrace(Direction d, int v) {
+
+        System.out.println("updateTrace: d: " + d + ", v: " +v);
+
+
         if(d == Direction.UP) {
-            y2 += v;
+            y2 -= v;
             repaint();
         }
         if(d == Direction.LEFT) {
@@ -41,7 +60,7 @@ public class GamePanel extends JPanel {
             repaint();
         }
         if(d == Direction.DOWN) {
-            y2 -= v;
+            y2 += v;
             repaint();
         }
         if(d == Direction.RIGHT) {
@@ -60,22 +79,12 @@ public class GamePanel extends JPanel {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_W) {
-                updateTrace(Direction.UP, 10);
-            }
-            if (e.getKeyCode() == KeyEvent.VK_A) {
-                updateTrace(Direction.LEFT, 10);
 
-            }
-            if (e.getKeyCode() == KeyEvent.VK_S) {
-                updateTrace(Direction.DOWN, 10);
-
-            }
-            if (e.getKeyCode() == KeyEvent.VK_D) {
-                updateTrace(Direction.RIGHT, 10);
-
-            }
-
+            System.out.println("Keypressed: " +e);
+            if (e.getKeyCode() == KeyEvent.VK_W) { trace.setDirection(Direction.UP); }
+            else if (e.getKeyCode() == KeyEvent.VK_A) { trace.setDirection(Direction.LEFT); }
+            else if (e.getKeyCode() == KeyEvent.VK_S) { trace.setDirection(Direction.DOWN); }
+            else if (e.getKeyCode() == KeyEvent.VK_D) { trace.setDirection(Direction.RIGHT); }
         }
 
         @Override
@@ -83,6 +92,19 @@ public class GamePanel extends JPanel {
 
         }
     }
+
+//    public static void main(String[] args) {
+//        GamePanel game = new GamePanel();
+//        game.updateTrace(Direction.UP, 100);
+//        game.updateTrace(Direction.UP, 100);
+//        game.updateTrace(Direction.UP, 100);
+//        game.updateTrace(Direction.RIGHT, 100);
+//        game.updateTrace(Direction.RIGHT, 100);
+//        System.out.printf("\nx2: %d", game.x2);
+//        System.out.printf("\ny2: %d", game.y2);
+//
+//
+//    }
 
 
 
